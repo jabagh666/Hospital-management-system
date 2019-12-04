@@ -11,6 +11,9 @@ create table Doctor(
 ID int auto_increment,
 name varchar(20),
 field varchar(20),
+days varchar(20),
+start_at TIME,
+end_at TIME,
 room numeric(2,0) null,
 primary key (ID));
 
@@ -22,11 +25,14 @@ primary key (ID));
 create table Nurse(
 ID int auto_increment,
 name varchar(20),
-primary key (ID));
+primary key (ID)
+);
 
 create table Room(
 number int,
-primary key (number));
+status TINYINT NULL DEFAULT 1,
+primary key (number)
+  );
 
 create table appointments(
 doc_id int,
@@ -38,3 +44,18 @@ primary key (doc_id,pat_id),
 foreign key (doc_id) references Doctor(ID),
 foreign key (pat_id) references Patient(ID),
 foreign key (room) references Room(number));
+
+create table veiw(
+khara varchar(5),
+nurse_id int,
+roomNo int,
+primary key (khara),
+foreign key (roomNo) references Room(number),
+foreign key (nurse_id) references Nurse(ID)
+);
+
+create table dayoff(
+doc_id int,
+notAv datetime,
+foreign key (doc_id) references Doctor(ID)
+);
