@@ -2,30 +2,29 @@ Tables:
 
 
 create table Patient(
-ID int auto_increment,
-name varchar(20),
-room numeric(2,0) null,
-primary key (ID));
+pID int auto_increment,
+pName varchar(20),
+room INT null,
+primary key (pID));
 
 create table Doctor(
-ID int auto_increment,
-name varchar(20),
+dID int auto_increment,
+dName varchar(20),
 field varchar(20),
-days varchar(20),
+working_days varchar(20),
 start_at TIME,
 end_at TIME,
-room numeric(2,0) null,
-primary key (ID));
+primary key (dID));
 
 create table Manager(
-ID int auto_increment,
-name varchar(20),
-primary key (ID));
+mID int auto_increment,
+mName varchar(20),
+primary key (mID));
 
 create table Nurse(
-ID int auto_increment,
-name varchar(20),
-primary key (ID)
+nID int auto_increment,
+nName varchar(20),
+primary key (nID)
 );
 
 create table Room(
@@ -37,25 +36,22 @@ primary key (number)
 create table appointments(
 doc_id int,
 pat_id int,
-room int,
-day datetime,
-time timestamp,
+room_no int,
+day date,
 primary key (doc_id,pat_id),
-foreign key (doc_id) references Doctor(ID),
-foreign key (pat_id) references Patient(ID),
-foreign key (room) references Room(number));
+foreign key (doc_id) references Doctor(dID),
+foreign key (pat_id) references Patient(pID),
+foreign key (room_no) references Room(number));
 
 create table veiw(
-khara varchar(5),
 nurse_id int,
-roomNo int,
-primary key (khara),
-foreign key (roomNo) references Room(number),
-foreign key (nurse_id) references Nurse(ID)
+room int,
+foreign key (room) references Room(number),
+foreign key (nurse_id) references Nurse(nID)
 );
 
 create table dayoff(
 doc_id int,
 notAv datetime,
-foreign key (doc_id) references Doctor(ID)
+foreign key (doc_id) references Doctor(dID)
 );
